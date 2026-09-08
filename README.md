@@ -1,5 +1,8 @@
 # Kermi x-center — Home Assistant core integration
 
+> **Not an official Kermi integration.** Independent and community-built, **not
+> affiliated with, endorsed by, or supported by Kermi GmbH**.
+
 Staging repository for the `kermi_xcenter` integration, laid out at Home
 Assistant core's own paths so it can be dropped into a `home-assistant/core`
 checkout:
@@ -49,9 +52,10 @@ the heat pump is required.
 **One device per module.** The heat pump is the main device; every other module
 is a sub-device linked with `via_device`.
 
-**Photovoltaic feed-in.** Kermi enables a separate device address per
-installation that accepts solar surplus power. It is undocumented, so it is
-treated as optional throughout and simply does not appear when absent.
+**Photovoltaic feed-in.** Kermi releases an excess-solar function per
+installation — separately from enabling Modbus at all — which exposes a device
+address accepting solar surplus power. It is undocumented, so it is treated as
+optional throughout and simply does not appear when absent.
 
 ## Development
 
@@ -89,6 +93,28 @@ python -m script.hassfest
    Contributions must be reviewed and understood by the contributor, and you
    must be able to explain every change in your own words.
 
-Register numbers, names, ranges and defaults come from Kermi's
-*Kurzanleitung – Einbindung in externe Systeme* (D00028482/05-2024). Not
-affiliated with, endorsed by, or supported by Kermi GmbH.
+## Credits and licence
+
+Apache License 2.0 — see [LICENSE](LICENSE).
+
+- The file layout and the entity, coordinator and config-flow patterns follow
+  the `trovis557x` integration on the
+  [trovis557x-integration](https://github.com/home-assistant/core/tree/trovis557x-integration/homeassistant/components/trovis557x)
+  branch of [home-assistant/core](https://github.com/home-assistant/core)
+  (Apache-2.0), corrected onto the `modbus.async_get_unit` API that actually
+  shipped. `pyproject.toml` carries core's own ruff configuration.
+- The device library is
+  [Cslegers/kermi-xcenter-modbus](https://github.com/Cslegers/kermi-xcenter-modbus);
+  see its `NOTICE.md` for what that builds on.
+- Register numbers, names, ranges and defaults come from Kermi's
+  *Kurzanleitung – Einbindung in externe Systeme* (D00028482/05-2024).
+
+**No code** is taken from the other Kermi projects that exist
+([py-kermi-xcenter](https://github.com/jr42/py-kermi-xcenter), the
+[openHAB binding](https://www.openhab.org/addons/bindings/modbus.kermi/),
+[kermi-ha-bridge](https://github.com/m-zenker/kermi-ha-bridge)); they were read
+while researching the interface, nothing more.
+
+Not affiliated with, endorsed by, or supported by Kermi GmbH. "Kermi" and
+"x-center" are trademarks of their respective owner, used only to identify the
+equipment this software talks to.

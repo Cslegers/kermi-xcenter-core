@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Connect to the x-center",
-        "description": "Kermi must enable the Modbus interface on your interface module before it will respond. The device addresses below are the ones Kermi ships; change them only if your installer did.",
+        "description": "Kermi must enable the Modbus interface on your interface module before it will respond, and the excess-solar function separately if you want the photovoltaic feed-in entity. The device addresses below are the ones Kermi ships; change them only if your installer did.",
         "data": {
           "host": "Host",
           "port": "Port",
@@ -15,7 +15,7 @@
         },
         "data_description": {
           "host": "The IP address of the x-center interface module. A static address is recommended, as a DHCP lease can move after a power cut.",
-          "unit_id_pv_feed": "Only present if Kermi has enabled photovoltaic surplus feed-in for your installation. Modules that do not answer are skipped."
+          "unit_id_pv_feed": "Only present if Kermi has released the excess-solar function for your installation, which is a separate request from enabling Modbus. Modules that do not answer are skipped."
         }
       }
     },
