@@ -1,0 +1,47 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to the x-center",
+        "description": "Kermi must enable the Modbus interface on your interface module before it will respond. The device addresses below are the ones Kermi ships; change them only if your installer did.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "unit_id_heat_pump": "Heat pump device address",
+          "unit_id_storage_heating": "Heating storage device address",
+          "unit_id_storage_hot_water": "Hot water storage device address",
+          "unit_id_universal_module": "Heating circuit module device address",
+          "unit_id_pv_feed": "Photovoltaic feed-in device address"
+        },
+        "data_description": {
+          "host": "The IP address of the x-center interface module. A static address is recommended, as a DHCP lease can move after a power cut.",
+          "unit_id_pv_feed": "Only present if Kermi has enabled photovoltaic surplus feed-in for your installation. Modules that do not answer are skipped."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "heat_pump_status_state": {
+        "state": {
+          "standby": "Standby",
+          "alarm": "Alarm",
+          "hot_water": "Hot water",
+          "cooling": "Cooling",
+          "heating": "Heating",
+          "defrost": "Defrost",
+          "preparing": "Preparing",
+          "blocked": "Blocked",
+          "utility_lock": "Utility lock",
+          "unavailable": "Unavailable"
+        }
+      }
+    }
+  }
+}

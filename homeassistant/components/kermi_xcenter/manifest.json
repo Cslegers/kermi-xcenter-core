@@ -1,0 +1,13 @@
+{
+  "domain": "kermi_xcenter",
+  "name": "Kermi x-center",
+  "codeowners": ["@slegerscm-ops"],
+  "config_flow": true,
+  "dependencies": ["modbus"],
+  "documentation": "https://www.home-assistant.io/integrations/kermi_xcenter",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "loggers": ["kermi_xcenter_modbus", "modbus_connection", "tmodbus"],
+  "quality_scale": "bronze",
+  "requirements": ["kermi-xcenter-modbus==0.1.0"]
+}
