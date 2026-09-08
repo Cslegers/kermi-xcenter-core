@@ -10,14 +10,14 @@ tests/components/kermi_xcenter/
 ```
 
 This is not installable on its own. To try the integration on a real system,
-use [`ha-kermi-xcenter`](https://github.com/slegerscm-ops/ha-kermi-xcenter),
+use [`ha-kermi-xcenter`](https://github.com/Cslegers/ha-kermi-xcenter),
 which packages the same code for HACS.
 
 ## What it does
 
 Talks to a Kermi x-center heat pump controller over local Modbus TCP. The
 protocol lives in
-[`kermi-xcenter-modbus`](https://github.com/slegerscm-ops/kermi-xcenter-modbus)
+[`kermi-xcenter-modbus`](https://github.com/Cslegers/kermi-xcenter-modbus)
 and is pulled in through `requirements`, as core's architecture expects; this
 repository holds only the Home Assistant layer.
 

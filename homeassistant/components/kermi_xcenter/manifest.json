@@ -1,7 +1,7 @@
 {
   "domain": "kermi_xcenter",
   "name": "Kermi x-center",
-  "codeowners": ["@slegerscm-ops"],
+  "codeowners": ["@Cslegers"],
   "config_flow": true,
   "dependencies": ["modbus"],
   "documentation": "https://www.home-assistant.io/integrations/kermi_xcenter",
