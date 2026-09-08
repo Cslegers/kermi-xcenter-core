@@ -42,8 +42,8 @@ NUMBERS: tuple[KermiNumberDescription, ...] = (
         device_class=NumberDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.WATT,
         native_min_value=0,
-        native_max_value=6553.5,
-        native_step=0.1,
+        native_max_value=65535,
+        native_step=1,
         mode=NumberMode.BOX,
     ),
     KermiNumberDescription(

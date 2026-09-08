@@ -229,8 +229,18 @@ def _storage_descriptions(module: str) -> tuple[KermiSensorDescription, ...]:
     )
 
 
+# Reported in whole watts, unlike the heat pump's kilowatt figures.
 PV_FEED: tuple[KermiSensorDescription, ...] = (
-    _power("heat_pump", "pv_modulation", "power", "Photovoltaic modulation power"),
+    KermiSensorDescription(
+        key="heat_pump_pv_modulation_power",
+        name="Photovoltaic modulation power",
+        module="heat_pump",
+        component="pv_modulation",
+        attribute="power",
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+    ),
 )
 
 
