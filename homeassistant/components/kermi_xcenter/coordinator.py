@@ -22,7 +22,9 @@ class KermiCoordinator(DataUpdateCoordinator[KermiXCenter]):
     ``async_update`` fans out to each sub-system, and each reads only its own
     registers, so adding or removing entities never changes what is polled.
     One sub-system failing does not take the rest of the poll with it; the
-    ``modbus`` integration owns the connection, this only reads.
+    ``modbus`` integration owns the connection, this only reads. ``failing``
+    holds the sub-systems the last answered poll could not read, so a failure
+    is logged when it starts and when it ends rather than on every poll.
     """
 
     def __init__(
@@ -40,6 +42,7 @@ class KermiCoordinator(DataUpdateCoordinator[KermiXCenter]):
             update_interval=SCAN_INTERVAL,
         )
         self.device = device
+        self.failing: set[str] = set()
 
     async def _async_update_data(self) -> KermiXCenter:
         """Refresh every module, failing only if nothing answered."""
@@ -51,7 +54,13 @@ class KermiCoordinator(DataUpdateCoordinator[KermiXCenter]):
         if not report.updated:
             raise UpdateFailed("The x-center did not answer any sub-system")
 
-        for label, error in report.failed.items():
-            _LOGGER.debug("Sub-system %s did not answer: %s", label, error)
+        failed = set(report.failed)
+        for label in sorted(failed - self.failing):
+            _LOGGER.warning(
+                "Sub-system %s stopped answering: %s", label, report.failed[label]
+            )
+        for label in sorted(self.failing - failed):
+            _LOGGER.info("Sub-system %s is answering again", label)
+        self.failing = failed
 
         return self.device

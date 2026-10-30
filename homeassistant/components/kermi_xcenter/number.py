@@ -3,6 +3,12 @@
 The photovoltaic feed-in entity is the one an automation writes to: point it at
 whatever your inverter reports as surplus and the controller modulates the heat
 pump against it. It only exists where Kermi has enabled that register.
+
+The photovoltaic modulation power target writes heat pump register 301 directly.
+It is a manual test tool, so it is disabled by default and nothing here writes
+to it on its own. Its scaling is not settled: one installation mirrors the
+feed-in value in whole watts, while evcc users report writing W x 10. The entity
+sends the number it is given unchanged.
 """
 
 from dataclasses import dataclass
@@ -45,6 +51,22 @@ NUMBERS: tuple[KermiNumberDescription, ...] = (
         native_max_value=65535,
         native_step=1,
         mode=NumberMode.BOX,
+    ),
+    # Register 301 reports differ on scaling; see the module docstring.
+    KermiNumberDescription(
+        key="heat_pump_pv_modulation_power_target",
+        name="Photovoltaic modulation power target",
+        module="heat_pump",
+        component="pv_modulation",
+        attribute="power",
+        device_class=NumberDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        native_min_value=0,
+        native_max_value=65535,
+        native_step=1,
+        mode=NumberMode.BOX,
+        entity_category=EntityCategory.CONFIG,
+        entity_registry_enabled_default=False,
     ),
     KermiNumberDescription(
         key="heat_pump_pv_heating_setpoint",
